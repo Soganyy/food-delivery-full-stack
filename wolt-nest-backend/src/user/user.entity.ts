@@ -1,0 +1,33 @@
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
+import { Order } from 'src/order/order.entity';
+
+@Entity('users')
+export class User {
+  @ApiProperty()
+  @Column({ type: 'text' })
+  email: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  phoneNumber: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  password: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  firstName: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  lastName: string;
+
+  @ApiProperty()
+  @Column({ type: 'text', nullable: true })
+  address: string;
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
+}
