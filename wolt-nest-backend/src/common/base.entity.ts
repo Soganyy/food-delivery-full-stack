@@ -11,10 +11,18 @@ export abstract class BaseEntity {
   id: number;
 
   @ApiProperty()
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    default: new Date().toISOString(),
+  })
   createdAt: Date;
 
   @ApiProperty()
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  @UpdateDateColumn({
+    name: 'updated_at',
+    type: 'timestamp',
+    default: new Date().toISOString(),
+  })
   updatedAt: Date;
 }

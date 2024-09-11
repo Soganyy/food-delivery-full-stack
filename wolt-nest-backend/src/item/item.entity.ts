@@ -4,9 +4,10 @@ import { Merchant } from 'src/merchant/merchant.entity';
 import { OrderItem } from 'src/order-item/order-item.entity';
 import { Specification } from 'src/specification/specification.entity';
 import { Category } from 'src/category/category.entity';
+import { BaseEntity } from 'src/common/base.entity';
 
 @Entity('items')
-export class Item {
+export class Item extends BaseEntity {
   @ApiProperty()
   @Column({ type: 'text' })
   title: string;

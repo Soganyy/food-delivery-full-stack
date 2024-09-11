@@ -1,9 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Order } from 'src/order/order.entity';
+import { BaseEntity } from 'src/common/base.entity';
 
 @Entity('users')
-export class User {
+export class User extends BaseEntity {
   @ApiProperty()
   @Column({ type: 'text' })
   email: string;
