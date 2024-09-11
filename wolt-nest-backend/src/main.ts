@@ -14,10 +14,8 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   const config = new DocumentBuilder()
-    .setTitle('Food-order-application')
-    .setDescription('API documentation')
+    .setTitle('Food-order-api')
     .setVersion('1.0')
-    .addTag('order-app')
     .addBearerAuth(
       {
         type: 'http',

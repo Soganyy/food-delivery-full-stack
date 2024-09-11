@@ -3,7 +3,7 @@ import { BaseEntity } from 'src/common/base.entity';
 import { Order } from 'src/order/order.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
-@Entity()
+@Entity('couriers')
 export class Courier extends BaseEntity {
   @ApiProperty()
   @Column()

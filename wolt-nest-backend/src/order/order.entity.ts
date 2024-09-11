@@ -4,9 +4,10 @@ import { User } from 'src/user/user.entity';
 import { Merchant } from 'src/merchant/merchant.entity';
 import { OrderItem } from 'src/order-item/order-item.entity';
 import { Courier } from 'src/courier/courier.entity';
+import { BaseEntity } from 'src/common/base.entity';
 
 @Entity('orders')
-export class Order {
+export class Order extends BaseEntity {
   @ApiProperty()
   @Column({ type: 'text' })
   title: string;
