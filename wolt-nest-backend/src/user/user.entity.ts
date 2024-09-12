@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Order } from 'src/order/order.entity';
 import { BaseEntity } from 'src/common/base.entity';
+import { RolesEnum } from 'src/enums/roles.enum';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -16,6 +17,10 @@ export class User extends BaseEntity {
   @ApiProperty()
   @Column({ type: 'text' })
   password: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  role: RolesEnum;
 
   @ApiProperty()
   @Column({ type: 'text' })

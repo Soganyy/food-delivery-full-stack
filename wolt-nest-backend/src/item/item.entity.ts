@@ -1,9 +1,6 @@
 import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Merchant } from 'src/merchant/merchant.entity';
-import { OrderItem } from 'src/order-item/order-item.entity';
-import { Specification } from 'src/specification/specification.entity';
-import { Category } from 'src/category/category.entity';
 import { BaseEntity } from 'src/common/base.entity';
 
 @Entity('items')
@@ -17,18 +14,9 @@ export class Item extends BaseEntity {
   description: string;
 
   @ApiProperty()
-  @Column({ type: 'bigint' })
+  @Column({ type: 'float' })
   price: number;
 
-  @ManyToOne(() => Merchant, (merchant) => merchant.items)
+  @ManyToOne(() => Merchant, (merchant) => merchant.id)
   merchant: Merchant;
-
-  @OneToMany(() => Specification, (specification) => specification.item)
-  specifications: Specification[];
-
-  @ManyToOne(() => Category, (category) => category.items)
-  category: Category;
-
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.item)
-  orderItems: OrderItem[];
 }

@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Item } from 'src/item/item.entity';
 import { Order } from 'src/order/order.entity';
 import { BaseEntity } from 'src/common/base.entity';
+import { RolesEnum } from 'src/enums/roles.enum';
 
 @Entity('merchants')
 export class Merchant extends BaseEntity {
@@ -17,6 +18,18 @@ export class Merchant extends BaseEntity {
   @ApiProperty()
   @Column({ type: 'text' })
   password: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  role: RolesEnum;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  firstName: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  lastName: string;
 
   @ApiProperty()
   @Column({ type: 'text' })

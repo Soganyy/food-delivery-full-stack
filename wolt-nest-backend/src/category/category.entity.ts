@@ -10,7 +10,4 @@ export class Category extends BaseEntity {
   title: string;
 
   // ParentId
-
-  @OneToMany(() => Item, (item) => item.category)
-  items: Item[];
 }

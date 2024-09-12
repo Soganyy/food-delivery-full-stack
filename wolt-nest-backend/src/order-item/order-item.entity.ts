@@ -16,7 +16,4 @@ export class OrderItem extends BaseEntity {
 
   @ManyToOne(() => Order, (order) => order.orderItems)
   order: Order;
-
-  @ManyToOne(() => Item, (item) => item.orderItems)
-  item: Item;
 }

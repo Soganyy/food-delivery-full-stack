@@ -12,7 +12,4 @@ export class Specification extends BaseEntity {
   @ApiProperty()
   @Column({ type: 'bigint' })
   option: number;
-
-  @ManyToOne(() => Item, (item) => item.specifications)
-  item: Item;
 }
