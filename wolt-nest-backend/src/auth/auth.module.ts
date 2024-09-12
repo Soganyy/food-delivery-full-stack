@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { MerchantModule } from 'src/merchant/merchant.module';
 import { CourierModule } from 'src/courier/courier.module';
+import { AuthGuard } from './guards/jwt.guard';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CourierModule } from 'src/courier/courier.module';
     CourierModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
+  exports: [AuthService, JwtModule, AuthGuard],
 })
 export class AuthModule {}
