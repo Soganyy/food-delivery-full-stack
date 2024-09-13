@@ -18,7 +18,12 @@ export class ItemService {
     private merchantService: MerchantService,
   ) {}
 
-  async getItems() {
+  async getItems(merchantId?: number) {
+    if (merchantId) {
+      return await this.itemEntity.find({
+        where: { merchant: { id: merchantId } },
+      });
+    }
     return await this.itemEntity.find();
   }
 
