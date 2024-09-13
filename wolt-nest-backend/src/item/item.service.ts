@@ -1,14 +1,11 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Item } from './item.entity';
 import { ItemCreateDto } from './dto/item.create.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MerchantService } from 'src/merchant/merchant.service';
+import { ItemResponseDto } from './dto/item.response.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class ItemService {
@@ -18,48 +15,74 @@ export class ItemService {
     private merchantService: MerchantService,
   ) {}
 
-  async getItems(merchantId?: number) {
+  async getItems(id?: number, merchantId?: number): Promise<ItemResponseDto[]> {
+    let where: any = {};
+
     if (merchantId) {
-      return await this.itemEntity.find({
-        where: { merchant: { id: merchantId } },
-      });
+      where.merchant = { id: merchantId };
     }
-    return await this.itemEntity.find();
+
+    if (id) {
+      where.id = id;
+    }
+
+    console.log(where);
+
+    const items = await this.itemEntity.find({
+      where,
+      relations: ['merchant'],
+    });
+
+    return items.map((item) =>
+      plainToInstance(ItemResponseDto, {
+        id: item.id,
+        title: item.title,
+        description: item.description,
+        price: item.price,
+        merchantId: item.merchant.id,
+      }),
+    );
   }
 
-  async createItem(body: ItemCreateDto, user: any) {
+  async createItem(body: ItemCreateDto, user: any): Promise<ItemResponseDto> {
     const merchant = await this.merchantService.findOne({
       email: user.email,
       password: user.password,
     });
 
     const newItem = this.itemEntity.create({ ...body, merchant: merchant });
-    const result = await this.itemEntity.save(newItem);
+    const savedItem = await this.itemEntity.save(newItem);
 
-    return result;
+    return plainToInstance(ItemResponseDto, {
+      id: savedItem.id,
+      title: savedItem.title,
+      description: savedItem.description,
+      price: savedItem.price,
+      merchantId: savedItem.merchant.id,
+    });
   }
 
-  async updateItem(body: ItemCreateDto, id: number) {
-    const itemExist = await this.itemEntity.findOne({
-      where: { id: id },
-    });
+  async updateItem(body: ItemCreateDto, id: number): Promise<ItemResponseDto> {
+    const itemExist = await this.itemEntity.findOne({ where: { id: id } });
 
     if (!itemExist) throw new NotFoundException('Item not found');
 
-    const item = Object.assign(itemExist, body);
-    const result = await this.itemEntity.save(item);
+    const updatedItem = Object.assign(itemExist, body);
+    const savedItem = await this.itemEntity.save(updatedItem);
 
-    return result;
+    return plainToInstance(ItemResponseDto, {
+      id: savedItem.id,
+      title: savedItem.title,
+      description: savedItem.description,
+      price: savedItem.price,
+      merchantId: savedItem.merchant.id,
+    });
   }
 
-  async deleteItem(id: number) {
-    try {
-      const item = await this.itemEntity.findOne({ where: { id: id } });
+  async deleteItem(id: number): Promise<void> {
+    const item = await this.itemEntity.findOne({ where: { id: id } });
 
-      if (!item) throw new NotFoundException('Item not found');
-      await this.itemEntity.delete(id);
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    if (!item) throw new NotFoundException('Item not found');
+    await this.itemEntity.delete(id);
   }
 }
