@@ -17,6 +17,6 @@ export class Item extends BaseEntity {
   @Column({ type: 'float' })
   price: number;
 
-  @ManyToOne(() => Merchant, (merchant) => merchant.id)
+  @ManyToOne(() => Merchant, (merchant) => merchant.items)
   merchant: Merchant;
 }
