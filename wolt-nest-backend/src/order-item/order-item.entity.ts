@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Order } from 'src/order/order.entity';
-import { Item } from 'src/item/item.entity';
 import { BaseEntity } from 'src/common/base.entity';
+import { Item } from 'src/item/item.entity';
 
 @Entity('orderItems')
 export class OrderItem extends BaseEntity {
@@ -11,8 +11,11 @@ export class OrderItem extends BaseEntity {
   quantity: number;
 
   @ApiProperty()
-  @Column({ type: 'bigint' })
+  @Column({ type: 'float' })
   price: number;
+
+  @ManyToOne(() => Item, (item) => item.orderItems)
+  item: Item;
 
   @ManyToOne(() => Order, (order) => order.orderItems)
   order: Order;

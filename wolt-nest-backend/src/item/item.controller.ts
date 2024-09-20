@@ -13,13 +13,14 @@ import {
 import { ItemService } from './item.service';
 import { ItemCreateDto } from './dto/item.create.dto';
 import { AuthGuard } from 'src/auth/guards/jwt.guard';
-import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { RolesGuard } from 'src/auth/guards/role.guard';
 import { Roles } from 'src/auth/decorators/role.decorator';
 import { RolesEnum } from 'src/enums/roles.enum';
 import { ItemResponseDto } from './dto/item.response.dto';
 
 @Controller('item')
+@ApiTags('Item')
 export class ItemController {
   constructor(private itemService: ItemService) {}
 

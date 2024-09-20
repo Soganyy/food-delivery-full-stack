@@ -1,4 +1,4 @@
 import { Module } from '@nestjs/common';
 
-@Module({})
+@Module({ exports: [] })
 export class OrderItemModule {}

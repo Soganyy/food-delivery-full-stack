@@ -44,4 +44,23 @@ export class MerchantService {
 
     return result;
   }
+
+  async getMerchantById(id: number) {
+    const merchant = await this.merchantEntity.findOne({
+      where: { id: id },
+    });
+
+    if (!merchant)
+      throw new HttpException(
+        "The merchant doesn't exist",
+        HttpStatus.BAD_REQUEST,
+      );
+
+    return merchant;
+  }
+
+  async getMerchants() {
+    const merchants = await this.merchantEntity.find();
+    return merchants;
+  }
 }
