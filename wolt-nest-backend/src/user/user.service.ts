@@ -38,4 +38,14 @@ export class UserService {
 
     return result;
   }
+
+  async getUserById(id: number) {
+    const user = await this.userEntity.findOne({
+      where: { id: id },
+    });
+    if (!user)
+      throw new HttpException("The user doesn't exist", HttpStatus.BAD_REQUEST);
+
+    return user;
+  }
 }

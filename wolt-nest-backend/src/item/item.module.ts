@@ -10,5 +10,6 @@ import { MerchantModule } from 'src/merchant/merchant.module';
   imports: [TypeOrmModule.forFeature([Item]), AuthModule, MerchantModule],
   controllers: [ItemController],
   providers: [ItemService],
+  exports: [ItemService],
 })
 export class ItemModule {}

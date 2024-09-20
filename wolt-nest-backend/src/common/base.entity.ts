@@ -14,7 +14,6 @@ export abstract class BaseEntity {
   @CreateDateColumn({
     name: 'created_at',
     type: 'timestamp',
-    default: new Date().toISOString(),
   })
   createdAt: Date;
 
@@ -22,7 +21,6 @@ export abstract class BaseEntity {
   @UpdateDateColumn({
     name: 'updated_at',
     type: 'timestamp',
-    default: new Date().toISOString(),
   })
   updatedAt: Date;
 }

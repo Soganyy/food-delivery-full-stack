@@ -9,20 +9,16 @@ import { BaseEntity } from 'src/common/base.entity';
 @Entity('orders')
 export class Order extends BaseEntity {
   @ApiProperty()
-  @Column({ type: 'text' })
-  title: string;
-
-  @ApiProperty()
-  @Column({ type: 'bigint' })
-  totalPrice: number;
-
-  @ApiProperty()
-  @Column({ type: 'bigint' })
+  @Column({ type: 'bigint', nullable: true })
   deliveryPrice: number;
 
   @ApiProperty()
-  @Column({ type: 'time' })
+  @Column({ type: 'timestamp', nullable: true })
   deliveryTime: Date;
+
+  @ApiProperty()
+  @Column({ type: 'float', nullable: true })
+  totalPrice: number;
 
   @ApiProperty()
   @Column({ type: 'text' })
@@ -34,9 +30,9 @@ export class Order extends BaseEntity {
   @ManyToOne(() => Merchant, (merchant) => merchant.orders)
   merchant: Merchant;
 
-  @ManyToOne(() => Courier, (courier) => courier.orders)
-  courier: Courier;
+  @ManyToOne(() => Courier, (couriers) => couriers.orders)
+  couriers: Courier;
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })
   orderItems: OrderItem[];
 }

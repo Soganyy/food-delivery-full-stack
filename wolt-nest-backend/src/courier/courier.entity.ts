@@ -34,6 +34,6 @@ export class Courier extends BaseEntity {
   @Column({ type: 'text' })
   vehicle: string;
 
-  @OneToMany(() => Order, (order) => order.courier)
+  @OneToMany(() => Order, (order) => order.couriers)
   orders: Order[];
 }

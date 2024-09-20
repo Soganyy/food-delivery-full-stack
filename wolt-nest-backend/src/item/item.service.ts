@@ -15,6 +15,15 @@ export class ItemService {
     private merchantService: MerchantService,
   ) {}
 
+  async getItemById(id: number) {
+    const item = await this.itemEntity.findOne({
+      where: { id: id },
+      relations: ['merchant'],
+    });
+
+    return item;
+  }
+
   async getItems(id?: number, merchantId?: number): Promise<ItemResponseDto[]> {
     let where: any = {};
 
@@ -25,8 +34,6 @@ export class ItemService {
     if (id) {
       where.id = id;
     }
-
-    console.log(where);
 
     const items = await this.itemEntity.find({
       where,
