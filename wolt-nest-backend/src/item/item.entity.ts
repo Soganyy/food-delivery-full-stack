@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Merchant } from 'src/merchant/merchant.entity';
 import { BaseEntity } from 'src/common/base.entity';
 import { OrderItem } from 'src/order-item/order-item.entity';
+import { Specification } from 'src/specification/specification.entity';
 
 @Entity('items')
 export class Item extends BaseEntity {
@@ -23,4 +24,9 @@ export class Item extends BaseEntity {
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.item)
   orderItems: OrderItem[];
+
+  @OneToMany(() => Specification, (specification) => specification.item, {
+    cascade: true,
+  })
+  specifications: Specification[];
 }

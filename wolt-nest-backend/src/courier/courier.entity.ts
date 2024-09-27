@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 import { BaseEntity } from 'src/common/base.entity';
 import { RolesEnum } from 'src/enums/roles.enum';
 import { Order } from 'src/order/order.entity';
@@ -24,6 +25,7 @@ export class Courier extends BaseEntity {
 
   @ApiProperty()
   @Column({ type: 'text' })
+  @Exclude()
   password: string;
 
   @ApiProperty()

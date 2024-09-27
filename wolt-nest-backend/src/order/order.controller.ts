@@ -49,8 +49,6 @@ export class OrderController {
     @Param('id') id: number,
     @Req() req,
   ) {
-    console.log(body);
-
     return this.orderService.updateOrderStatus(req.user, id, body);
   }
 }

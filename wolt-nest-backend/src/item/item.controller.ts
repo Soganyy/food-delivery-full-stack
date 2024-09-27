@@ -38,10 +38,7 @@ export class ItemController {
   @Roles(RolesEnum.Merchant)
   @UseGuards(AuthGuard, RolesGuard)
   @ApiBearerAuth('JWT-auth')
-  createItem(
-    @Body() body: ItemCreateDto,
-    @Req() req: any,
-  ): Promise<ItemResponseDto> {
+  createItem(@Body() body: ItemCreateDto, @Req() req: any) {
     return this.itemService.createItem(body, req.user);
   }
 

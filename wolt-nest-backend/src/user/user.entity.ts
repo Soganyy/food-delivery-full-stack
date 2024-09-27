@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Order } from 'src/order/order.entity';
 import { BaseEntity } from 'src/common/base.entity';
 import { RolesEnum } from 'src/enums/roles.enum';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -16,6 +17,7 @@ export class User extends BaseEntity {
 
   @ApiProperty()
   @Column({ type: 'text' })
+  @Exclude()
   password: string;
 
   @ApiProperty()
