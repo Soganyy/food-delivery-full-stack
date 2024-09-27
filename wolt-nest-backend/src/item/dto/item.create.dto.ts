@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
+import { SpecificationCreateDto } from 'src/specification/dto/specification.create.dto';
 
 export class ItemCreateDto {
   @ApiProperty({ default: 'string' })
@@ -13,4 +14,8 @@ export class ItemCreateDto {
   @ApiProperty({ default: 0 })
   @IsNotEmpty()
   price: number;
+
+  @ApiProperty({ type: [SpecificationCreateDto] })
+  @IsOptional()
+  specifications: SpecificationCreateDto[];
 }

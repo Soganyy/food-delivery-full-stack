@@ -4,6 +4,7 @@ import { Item } from 'src/item/item.entity';
 import { Order } from 'src/order/order.entity';
 import { BaseEntity } from 'src/common/base.entity';
 import { RolesEnum } from 'src/enums/roles.enum';
+import { Exclude } from 'class-transformer';
 
 @Entity('merchants')
 export class Merchant extends BaseEntity {
@@ -17,6 +18,7 @@ export class Merchant extends BaseEntity {
 
   @ApiProperty()
   @Column({ type: 'text' })
+  @Exclude()
   password: string;
 
   @ApiProperty()

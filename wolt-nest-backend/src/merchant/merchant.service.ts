@@ -5,6 +5,7 @@ import { Merchant } from './merchant.entity';
 import { Repository } from 'typeorm';
 import { RolesEnum } from 'src/enums/roles.enum';
 import { RegisterMerchantDto } from 'src/auth/dto/merchantRegister..dto';
+import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class MerchantService {
@@ -61,6 +62,6 @@ export class MerchantService {
 
   async getMerchants() {
     const merchants = await this.merchantEntity.find();
-    return merchants;
+    return instanceToPlain(merchants);
   }
 }
