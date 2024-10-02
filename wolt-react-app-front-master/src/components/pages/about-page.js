@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../navbar/navbar";
 import Contacts from "../contacts/contacts";
 import TitleBackground from "../title-background/title-background";
 

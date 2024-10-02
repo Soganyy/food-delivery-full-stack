@@ -1,7 +1,7 @@
 import React from "react";
 import "./order-info-card.css";
 
-const OrderInfoCard = ({ name, cookTime, price, rate, height }) => {
+const OrderInfoCard = ({ name, description, price, rate, height }) => {
   return (
     <div>
       <div className="order-container" style={{ height: height }}>
@@ -11,20 +11,14 @@ const OrderInfoCard = ({ name, cookTime, price, rate, height }) => {
         </div>
         <div className="order-info-container">
           <span>
-            <p className="gray-text">Cook Time:</p>
-            {cookTime} min
+            <p className="gray-text">Description:</p>
+            {description}
             <br></br>
             <br></br>
             <p className="gray-text">Price:</p>
             {price} $ 
             <br></br>
             <br></br>
-            <p className="gray-text">Rate:</p>
-            {rate}
-            <br></br>
-            <br></br>
-            <p className="gray-text">Address:</p>
-            IITU
           </span>
         </div>
       </div>
@@ -37,7 +31,7 @@ const OrderInfoCard = ({ name, cookTime, price, rate, height }) => {
 //         "id": 1,
 //         "price": 15000,
 //         "name": "Salade",
-//         "cookTime": 30
+//         "description": 30
 //     },
 //     "rate": 0
 // }

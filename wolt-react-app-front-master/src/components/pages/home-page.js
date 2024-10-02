@@ -1,6 +1,4 @@
 import React from "react";
-import LoginForm from "../login-form/login-form";
-import NavBar from "../navbar/navbar";
 import MenuComponent from "../../menu-component/menu-rename";
 import TitleBackground from "../title-background/title-background";
 import BackgroundCard from "../background-card/background-card";

@@ -24,7 +24,7 @@ import { ItemResponseDto } from './dto/item.response.dto';
 export class ItemController {
   constructor(private itemService: ItemService) {}
 
-  @Get(':id')
+  @Get()
   @ApiQuery({ name: 'merchantId', required: false })
   @ApiQuery({ name: 'id', required: false })
   getItems(

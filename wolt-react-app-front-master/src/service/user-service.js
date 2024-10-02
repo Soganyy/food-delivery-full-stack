@@ -1,26 +1,26 @@
 class UserService {
-  static API_URL = "http://localhost:8080/api";
+  static API_URL = "http://localhost:3000/api";
 
   BEARER_TOKEN = null;
 
   // LOGIN
-  loginUser = async (usernameOrEmail, password) => {
+  loginUser = async (email, password) => {
     try {
-      const response = await fetch(`${UserService.API_URL}/auth/signin`, {
+      const response = await fetch(`${UserService.API_URL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          usernameOrEmail,
+          email,
           password,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem("token", data.accessToken);
-        return { success: true, message: data.accessToken };
+        localStorage.setItem("token", JSON.stringify(data));
+        return { success: true, message: data };
       } else {
         const errorData = await response.json();
         return {

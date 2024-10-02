@@ -32,17 +32,17 @@ const NavBar = () => {
           userService.setBearerToken();
 
           // Fetch user details using the Bearer token
-          const userDetails = await userService.getUserDetails();
+          // const userDetails = await userService.getUserDetails();
 
-          if (userDetails.success) {
-            userAuthService.setUser({
-              name: userDetails.user.name,
-              usernameOrEmail: userDetails.user.username,
-              // Add other necessary user information here
-            });
-            setUser(userDetails.user);
-            setUserLoggedIn(true);
-          }
+          // if (userDetails.success) {
+          //   userAuthService.setUser({
+          //     name: userDetails.user.name,
+          //     usernameOrEmail: userDetails.user.username,
+          //     // Add other necessary user information here
+          //   });
+          //   setUser(userDetails.user);
+          //   setUserLoggedIn(true);
+          // }
         }
 
         setCheckUser(true);

@@ -5,10 +5,10 @@ const FoodsPage = () => {
 
     return (
         <div className="container mt-5">
-            <MenuComponent height={300 } query={'Burger'} />
-            <MenuComponent height={500 } query={'Soup'} />
-            <MenuComponent height={300 } query={'Pizza'} />
-            <MenuComponent height={300 } query={'Salad'} />
+            <MenuComponent height={300 }  />
+            <MenuComponent height={500 }  />
+            <MenuComponent height={300 }  />
+            <MenuComponent height={300 }  />
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { PropagateLoader } from "react-spinners";
 import productService from '../service/product-service';
 import { Link } from 'react-router-dom';
 
-const MenuComponent = ({ height, query, number }) => {
+const MenuComponent = ({ height, number }) => {
   number = number || 15;
   const [menuData, setMenuData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,9 @@ const MenuComponent = ({ height, query, number }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await productService.searchProductByName({ query: query });
+        const data = await productService.getAllProducts();
+        console.log(data);
+        
         setMenuData(data);
         setIsLoading(false);
       } catch (error) {
@@ -22,7 +24,7 @@ const MenuComponent = ({ height, query, number }) => {
     };
 
     fetchData();
-  }, [query, number]);
+  }, [number]);
 
   return (
     isLoading ? (
@@ -33,11 +35,11 @@ const MenuComponent = ({ height, query, number }) => {
       <div>
         <div className='menu-container container'>
           {menuData && menuData.map((item) => (
-            <div className='product-card' key={item.product.id}>
-              <Link to={`/order/${item.product.id}`}>
+            <div className='product-card' key={item.id}>
+              <Link to={`/order/${item.id}`}>
                 <ImageTitleCard
-                  name={item.product.name}
-                  price={item.product.price}
+                  name={item.title}
+                  price={item.price}
                   height={height}
                   rate={item.rate}
                 />
