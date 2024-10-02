@@ -4,7 +4,7 @@ import { EmojiSmile } from 'react-bootstrap-icons';
 
 import imageCardImg from '../../assets/image-card-default.png'
 
-const ImageTitleCard = ({ name, rate, price, height}) => {
+const ImageTitleCard = ({ name, description, price, height}) => {
 
     return (
         <div>
@@ -13,11 +13,12 @@ const ImageTitleCard = ({ name, rate, price, height}) => {
                     <img src={imageCardImg} className="card-img-top" alt="Card Header" />
                     <div className="image-card-body">
                         <h5 className="card-title">{name}</h5>
+                        <p>{description}</p>
                     </div>
                     <div className="image-card-footer">
                         <span>
 
-                            {price*460} ₸  <EmojiSmile size={13} /> {rate}
+                            {price} $
                         </span>
                     </div>
                 </div>

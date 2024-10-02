@@ -1,5 +1,5 @@
 class ProductService {
-  static WOLT_URL = "http://localhost:8080/api";
+  static WOLT_URL = "http://localhost:3000/api";
   // Method to set the Bearer token
   setBearerToken() {
     const token = localStorage.getItem("token");
@@ -53,7 +53,30 @@ class ProductService {
   searchProductByName = async ({ query }) => {
     try {
       const response = await fetch(
-        `${ProductService.WOLT_URL}/product/search?name=${query}`,
+        `${ProductService.WOLT_URL}/item`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
+
+  getAllProducts = async (id) => {
+    try {
+      const response = await fetch(
+        `${ProductService.WOLT_URL}/item?id=${id}`,
         {
           method: "GET",
           headers: {

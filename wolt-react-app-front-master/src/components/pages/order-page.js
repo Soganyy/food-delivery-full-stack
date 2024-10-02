@@ -14,8 +14,9 @@ const OrderPage = () => {
     const fetchProductData = async () => {
       try {
         console.log(productId);
-        const response = await productService.getProductDetails(productId);
-        setProductData(response);
+        const response = await productService.getAllProducts(productId);
+        
+        setProductData(response[0]);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -44,10 +45,9 @@ const OrderPage = () => {
                 </div>
                 <div className="order-right-card">
                   <OrderInfoCard
-                    name={productData.product.name}
-                    price={productData.product.price}
-                    cookTime={productData.product.cookTime}
-                    rate={productData.rate}
+                    name={productData.title}
+                    price={productData.price}
+                    description={productData.description}
                   />
                   <button
                     className="border-button mt-5"

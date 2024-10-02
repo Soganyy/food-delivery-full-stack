@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./login-form.css";
 import userService from "../../service/user-service";
 import MessageModal from "../message-modal/message-modal";
 
-import { Envelope } from "react-bootstrap-icons";
 import userAuthService from "../../service/user-auth";
 
 const LoginForm = () => {
-  const [usernameOrEmail, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [modalShow, setModalShow] = useState(false);
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleShow = (msg) => {
     setMessage(msg);
@@ -27,12 +25,14 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const data = await userService.loginUser(usernameOrEmail, password);
+      const data = await userService.loginUser(email, password);
+      console.log(data);
+      
 
       if (data.success) {
         // Assuming data.accessToken and data.tokenType are present in the response
         userAuthService.setUser({
-          usernameOrEmail: usernameOrEmail,
+          email: email,
           accessToken: data.accessToken,
           tokenType: data.tokenType,
         });
@@ -40,7 +40,7 @@ const LoginForm = () => {
         localStorage.setItem(
           "currentUser",
           JSON.stringify({
-            usernameOrEmail: usernameOrEmail,
+            email: email,
             accessToken: data.accessToken,
             tokenType: data.tokenType,
           })
@@ -62,9 +62,9 @@ const LoginForm = () => {
         <h4>Login</h4>
         <div className="mb-3 input-group">
           <input
-            type="usernameOrEmail"
+            type="email"
             className="form-control"
-            value={usernameOrEmail}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             required

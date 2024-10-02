@@ -1,6 +1,5 @@
 import React from "react";
 import LoginForm from "../login-form/login-form";
-import NavBar from "../navbar/navbar";
 
 
 export const LoginPage = () => {
