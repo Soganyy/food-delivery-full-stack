@@ -1,13 +1,21 @@
+* {
+  font-family: "Omnes Bold";
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Set the custom font with a fallback */
+}
+
+@font-face {
+  font-family: "Omnes Bold"; /* Font family name */
+  font-style: normal; /* Set the font style */
+  font-weight: bold; /* Set the font weight to bold */
+  src: local("Omnes Bold"), url("Omnes Bold.woff") format("woff"); /* Specify the source */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Omnes Bold"; /* Apply the custom font to code elements */
 }

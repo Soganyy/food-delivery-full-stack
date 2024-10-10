@@ -1,7 +1,6 @@
+import { Entity, Column, ManyToOne, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseEntity } from 'src/common/base.entity';
-import { Item } from 'src/item/item.entity';
-import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity('categories')
 export class Category extends BaseEntity {
@@ -9,5 +8,12 @@ export class Category extends BaseEntity {
   @Column()
   title: string;
 
-  // ParentId
+  @ApiProperty({ type: () => Category })
+  @ManyToOne(() => Category, (category) => category.subcategories, {
+    nullable: true,
+  })
+  parent: Category;
+
+  @OneToMany(() => Category, (category) => category.parent)
+  subcategories: Category[];
 }
